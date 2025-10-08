@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ DARK MATRIX | PHONE INFO</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    
+    <!-- Matrix Rain Background -->
+    <canvas id="matrix"></canvas>
+
+    <!-- Gate Animation -->
+    <div class="gate" id="gate">
+        <div class="gate-line">╔═══════════════════════════════╗</div>
+        <div class="gate-line">║    🚀 INITIALIZING SYSTEM    ║</div>
+        <div class="gate-line">║    🔒 DARK MATRIX ACCESS     ║</div>
+        <div class="gate-line">║    📱 PHONE INFO MODULE      ║</div>
+        <div class="gate-line">╚═══════════════════════════════╝</div>
+    </div>
+
+    <!-- Main Content (Hidden Initially) -->
+    <div class="main-container" id="mainContainer">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">⚡</div>
+                <h3>DARK MATRIX</h3>
+            </div>
+            <div class="sidebar-menu">
+                <div class="menu-item active" onclick="showSection('home')">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </div>
+                <div class="menu-item" onclick="showSection('search')">
+                    <i class="fas fa-search"></i>
+                    <span>Search</span>
+                </div>
+                <div class="menu-item" onclick="showAdminLogin()">
+                    <i class="fas fa-cog"></i>
+                    <span>Admin</span>
+                </div>
+                <div class="menu-item" onclick="showSection('about')">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="content-area">
+            <!-- Home Section -->
+            <div id="home" class="section active">
+                <div class="hero-section">
+                    <h1 class="glitch-text">DARK MATRIX</h1>
+                    <p class="tagline">Advanced Phone Information System</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-database"></i>
+                            <h3>Real Data</h3>
+                            <p>Live API Integration</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>Secure</h3>
+                            <p>Encrypted Connection</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-bolt"></i>
+                            <h3>Fast</h3>
+                            <p>Instant Results</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search Section -->
+            <div id="search" class="section">
+                <div class="search-container">
+                    <h2>🔍 PHONE INFORMATION SEARCH</h2>
+                    <div class="search-box">
+                        <input type="text" id="phoneInput" placeholder="Enter 10-digit phone number..." maxlength="10">
+                        <button id="searchBtn" onclick="searchPhone()">
+                            <i class="fas fa-search"></i> SCAN
+                        </button>
+                    </div>
+                    
+                    <div class="loading" id="loading">
+                        <div class="scanning-animation">
+                            <div class="scan-line"></div>
+                        </div>
+                        <p>ACCESSING DATABASE...</p>
+                    </div>
+
+                    <div class="results-container" id="resultsContainer">
+                        <!-- Results will appear here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <div id="about" class="section">
+                <div class="about-container">
+                    <h2>🛠️ ABOUT SYSTEM</h2>
+                    <div class="tech-stack">
+                        <h3>Technology Stack</h3>
+                        <ul>
+                            <li>⚡ HTML5, CSS3, JavaScript</li>
+                            <li>🔧 Advanced API Integration</li>
+                            <li>🎨 Custom Hacker UI/UX</li>
+                            <li>🔒 Secure Authentication</li>
+                        </ul>
+                    </div>
+                    <div class="contact-info">
+                        <h3>Contact Developer</h3>
+                        <a href="https://t.me/7320805030" class="telegram-btn" target="_blank">
+                            <i class="fab fa-telegram"></i> Telegram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🔐 ADMIN ACCESS</h3>
+                <span class="close" onclick="closeAdminModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <input type="password" id="adminPassword" placeholder="Enter admin password" class="admin-input">
+                <button onclick="checkAdminPassword()" class="admin-login-btn">ACCESS SYSTEM</button>
+                <div id="loginError" class="error-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="admin-panel">
+        <div class="admin-header">
+            <h2>⚙️ ADMIN DASHBOARD</h2>
+            <button onclick="logoutAdmin()" class="logout-btn">LOGOUT</button>
+        </div>
+        <div class="admin-content">
+            <div class="admin-section">
+                <h3>API Configuration</h3>
+                <div class="api-config">
+                    <input type="text" id="apiUrl" placeholder="API URL" value="https://yahu.site/api/">
+                    <input type="text" id="apiKey" placeholder="API Key" value="The_ajay">
+                    <button onclick="saveApiConfig()">SAVE CONFIG</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="hoverSound" preload="auto">
+        <source src="sounds/hover.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="clickSound" preload="auto">
+        <source src="sounds/click.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="successSound" preload="auto">
+        <source src="sounds/success.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
